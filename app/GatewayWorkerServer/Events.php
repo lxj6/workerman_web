@@ -41,11 +41,13 @@ class Events
             case 'ping' :
                 return;
             case 'login' :
-
+                return;
             case 'say' :
                     $resData = [
                         'type' => 'say',
                         'time' => time(),
+                        'client_id' => $client_id,
+                        'name' => $message_data->name,
                         'contentText' => $message_data->contentText,
                     ];
                     Gateway::sendToAll(json_encode($resData));
