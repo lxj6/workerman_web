@@ -8,4 +8,9 @@ class TestController extends Controller
     {
         echo 'test';
     }
+
+    public function test2()
+    {
+
+    }
 }
