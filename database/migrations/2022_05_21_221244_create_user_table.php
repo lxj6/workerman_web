@@ -17,11 +17,12 @@ class CreateUserTable extends Migration
             $table->id();
             $table->string('user_name','20');
             $table->string('password','60');
-            $table->string('chat_id','20');
-            $table->string('phone','11');
+            $table->string('chat_id','20')->default('');
+            $table->string('phone','11')->default('');
+            $table->integer('created_at',false,true)->default(0);
+            $table->integer('updated_at',false,true)->default(0);
             $table->index('phone');
             $table->index('chat_id');
-            $table->timestamps();
         });
     }
 

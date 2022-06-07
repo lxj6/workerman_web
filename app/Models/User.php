@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends DBModel
 {
-    use Notifiable;
-
     protected $table = 'user';
 
-
+    public static function create($user_name, $password)
+    {
+        $user = new User();
+        $user->user_name = $user_name;
+        $user->password = password_hash($password,PASSWORD_BCRYPT);
+        $user->save();
+    }
 
 }
