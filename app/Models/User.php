@@ -15,4 +15,10 @@ class User extends DBModel
         $user->save();
     }
 
+    public static function login()
+    {
+        return response()->error(100,'test');
+    }
+
+
 }
