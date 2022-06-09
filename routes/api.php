@@ -24,3 +24,11 @@ Route::prefix('user')->group(function(){
     Route::post('register','UserController@register');
     Route::post('login','UserController@login');
 });
+Route::middleware(['api-token-auth'])->group(function () {
+
+    Route::prefix('user')->group(function () {
+        Route::post('info','UserController@info');
+    });
+
+});
+

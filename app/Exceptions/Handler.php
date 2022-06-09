@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -57,6 +58,13 @@ class Handler extends ExceptionHandler
             return response()->error(400, '请求参数错误。'.Arr::first($arr));
         }
 
+        if ($exception instanceof BusinessException) {
+            return response()->error($exception->getCode(), $exception->getMessage());
+        }
+
+        if ($exception instanceof UnauthorizedHttpException) {
+            return response()->error(401, $exception->getMessage());
+        }
 
         return parent::render($request, $exception);
     }

@@ -3,9 +3,14 @@
 namespace App\Models;
 
 
-class User extends DBModel
+class User extends ApiCaller
 {
     protected $table = 'user';
+
+    protected $hidden = ['password','id'];
+
+    const Api_Caller_Type = 'user';
+
 
     public static function create($user_name, $password)
     {
@@ -15,10 +20,6 @@ class User extends DBModel
         $user->save();
     }
 
-    public static function login()
-    {
-        return response()->error(100,'test');
-    }
 
 
 }
