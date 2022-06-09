@@ -2,9 +2,6 @@
 
 namespace App\Exceptions;
 
-
-use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
-
 class BusinessException extends \Exception
 {
 
