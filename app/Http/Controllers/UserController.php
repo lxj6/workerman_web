@@ -41,4 +41,16 @@ class UserController extends Controller
     }
 
 
+    public function query(Request $request)
+    {
+        $request->validate([
+            'user_name' => 'required',
+        ]);
+
+        $usre = User::where('user_name',$request->post('user_name'))->first();
+
+        return response()->array($usre);
+    }
+
+
 }
