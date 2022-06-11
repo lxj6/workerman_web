@@ -32,5 +32,9 @@ Route::middleware(['api-token-auth'])->group(function () {
         Route::post('bindPhone','UserController@bindPhone');
     });
 
+    Route::prefix('public')->group(function () {
+        Route::post('uploadImg','PublicController@uploadImg');
+    });
+
 });
 
