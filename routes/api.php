@@ -30,6 +30,7 @@ Route::middleware(['api-token-auth'])->group(function () {
         Route::post('info','UserController@info');
         Route::post('query','UserController@query');
         Route::post('bindPhone','UserController@bindPhone');
+        Route::post('editHeadPortrait','UserController@editHeadPortrait');
     });
 
     Route::prefix('public')->group(function () {

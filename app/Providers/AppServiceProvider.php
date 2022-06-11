@@ -35,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
             return Response::json_unicode(['code' => $code, 'msg' => $msg, 'token' => $token]);
         });
 
+        Response::macro('string', function ($value, $token = '') {
+            return Response::json_unicode(['code' => 0, 'msg' => 'success', 'data' => $value, 'token' => $token]);
+        });
+
         Response::macro('array', function ($data, $code = 0, $msg = 'success', $token = '') {
             return Response::json_unicode(['code' => $code, ' msg' => $msg, 'data' => $data, 'token' => $token]);
         });

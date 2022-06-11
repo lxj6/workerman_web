@@ -66,8 +66,14 @@ class UserController extends Controller
     public function editHeadPortrait(Request $request)
     {
         $request->validate([
-            'headPortrait' => 'required',
+            'head_portrait' => 'required',
         ]);
+
+        $user = Auth::user();
+
+        User::where('id',$user->id)->update(['head_portrait' => $request->post('head_portrait')]);
+
+        return response()->success();
     }
 
 }

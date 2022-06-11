@@ -13,7 +13,10 @@ class PublicController extends Controller
         $request->validate([
             'img' => 'required|image',
         ]);
-        test();
+
+        $url = upload_img($request->file('img'));
+
+        return response()->string($url);
     }
 
 
