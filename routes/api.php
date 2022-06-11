@@ -28,6 +28,8 @@ Route::middleware(['api-token-auth'])->group(function () {
 
     Route::prefix('user')->group(function () {
         Route::post('info','UserController@info');
+        Route::post('query','UserController@query');
+        Route::post('bindPhone','UserController@bindPhone');
     });
 
 });
