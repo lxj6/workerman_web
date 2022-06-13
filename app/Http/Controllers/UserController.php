@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     const Check_Rule = [
-        'user_name' => 'required|max:20',
-        'password'  => 'required|max:16',
+        'user_name' => 'bail|required|max:20',
+        'password'  => 'bail|required|max:16',
     ];
 
     public function register(Request $request)

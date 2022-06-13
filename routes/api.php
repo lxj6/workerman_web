@@ -33,6 +33,10 @@ Route::middleware(['api-token-auth'])->group(function () {
         Route::post('editHeadPortrait','UserController@editHeadPortrait');
     });
 
+    Route::prefix('firend')->group(function () {
+        Route::post('add','FirendsController@add');
+    });
+
     Route::prefix('public')->group(function () {
         Route::post('uploadImg','PublicController@uploadImg');
     });

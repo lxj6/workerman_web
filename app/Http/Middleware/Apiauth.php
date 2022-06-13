@@ -30,8 +30,13 @@ class Apiauth
                 if ($api_enable_fake == false) {
                     throw new UnauthorizedHttpException('x-api-token','api认证失败，找不到认证参数');
                 }
+
+                $caller_user_id = $request->headers->get('API-CALLER-ID');
+
                 $caller_type = env('API_CALLER_TYPE',null);
-                $caller_user_id = env('API_CALLER_ID',null);
+                if (is_null($caller_user_id)) {
+                    $caller_user_id = env('API_CALLER_ID',null);
+                }
 
                 if ($caller_type == null || $caller_user_id == null) {
                     throw new UnauthorizedHttpException('x-api-token','api认证失败，找不到认证参数');

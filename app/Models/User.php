@@ -7,7 +7,7 @@ class User extends ApiCaller
 {
     protected $table = 'user';
 
-    protected $hidden = ['password','id'];
+    protected $hidden = ['chat_id','password','phone','updated_at'];
 
     const Api_Caller_Type = 'user';
 
