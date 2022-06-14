@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Exceptions\BusinessException;
 use App\Models\FirendRequestRecord;
+use App\Models\Firends;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FirendsServers extends BaseServers
 {
@@ -21,7 +23,25 @@ class FirendsServers extends BaseServers
     public function agree($record_id)
     {
         $record = FirendRequestRecord::findOrFail($record_id);
-        dd($record);
+        try {
+            DB::beginTransaction();
+            $create = [
+                'user_id' => $record->form_id,
+                'firend_id' => $record->to_id,
+            ];
+            Firends::create($create);
+            $reverse = [
+                'user_id' => $record->to_id,
+                'firend_id' => $record->form_id,
+            ];
+            Firends::create($reverse);
+            $record->state = 1;
+            $record->save();
+            DB::commit();
+        } catch (BusinessException $e) {
+            DB::rollBack();
+            throw new BusinessException('ServerError:'.$e->getMessage());
+        }
     }
 
 }

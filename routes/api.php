@@ -37,6 +37,7 @@ Route::middleware(['api-token-auth'])->group(function () {
         Route::post('add','FirendsController@add');
         Route::post('agree','FirendsController@agree');
         Route::post('refuse','FirendsController@refuse');
+        Route::post('applyList','FirendsController@applyList');
     });
 
     Route::prefix('public')->group(function () {

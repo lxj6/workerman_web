@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
@@ -64,6 +65,14 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof UnauthorizedHttpException) {
             return response()->error(401, $exception->getMessage());
+        }
+
+        if ($exception instanceof ModelNotFoundException) {
+            return response()->error(500, $exception->getMessage());
+        }
+
+        if (env('app.debug') == false) {
+            return response()->error(500, $exception->getMessage());
         }
 
         return parent::render($request, $exception);

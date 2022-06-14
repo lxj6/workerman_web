@@ -16,4 +16,15 @@ class FirendRequestRecord extends DBModel
         $firend->save();
     }
 
+
+    public function form_id()
+    {
+        return $this->hasOne('App\Models\User','id','form_id');
+    }
+
+    public function to_id()
+    {
+        return $this->hasOne('App\Models\User','id','to_id');
+    }
+
 }

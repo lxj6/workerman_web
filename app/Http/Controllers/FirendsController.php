@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FirendRequestRecord;
 use App\Services\FirendsServers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FirendsController extends Controller
 {
@@ -21,9 +22,13 @@ class FirendsController extends Controller
         return response()->success();
     }
 
-    public function applyList(Request $request)
+    public function applyList()
     {
+        $user = Auth::user();
 
+        $list = FirendRequestRecord::with(['form_id','to_id'])->get()->toArray();
+
+        dd($list);
     }
 
     public function agree(Request $request)

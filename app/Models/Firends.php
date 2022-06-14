@@ -6,4 +6,5 @@ class Firends extends DBModel
 {
     protected $table = 'firends';
 
+    protected $guarded = [];
 }
