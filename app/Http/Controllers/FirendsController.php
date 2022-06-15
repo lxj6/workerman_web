@@ -28,7 +28,7 @@ class FirendsController extends Controller
 
         $list = FirendRequestRecord::with(['form_id','to_id'])->get()->toArray();
 
-        dd($list);
+        return response()->array($list);
     }
 
     public function agree(Request $request)
