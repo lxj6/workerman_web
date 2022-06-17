@@ -18,7 +18,7 @@ class Events
             'type'      => 'init',
             'client_id' => $client_id,
         ];
-        var_dump($res);
+        //var_dump($res);
         Gateway::sendToClient($client_id, json_encode($res));
     }
 

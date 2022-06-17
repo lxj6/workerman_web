@@ -40,10 +40,7 @@ class Test extends Command
     public function handle()
     {
         $str = "test -{$this->argument('user')} --opt= {$this->option('opt')}";
-        $pt = __DIR__.'/test.txt';
-        $fp = fopen($pt,'a+');
-        fwrite($fp,$str.PHP_EOL);
-        fclose($fp);
-        Log::debug("test -{$this->argument('user')} --opt= {$this->option('opt')} {$pt} ");
+
+        Log::info("test -{$this->argument('user')} --opt= {$this->option('opt')}");
     }
 }
