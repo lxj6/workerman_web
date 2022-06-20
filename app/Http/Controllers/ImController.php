@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-class ImControllere extends Controller
+class ImController extends Controller
 {
+    public function create()
+    {
 
+    }
 }
