@@ -73,7 +73,7 @@ class GatewayWorkerServer extends Command
         $business                  = new BusinessWorker();
         $business->name            = 'business';                  //进程名称
         $business->count           = 2;                           //进程数量
-        $business->registerAddress = '172.17.104.117:2346';            //注册地址
+        $business->registerAddress = '172.17.0.14:2346';            //注册地址
         $business->eventHandler    = Events::class;               //处理业务类
     }
 
@@ -89,7 +89,7 @@ class GatewayWorkerServer extends Command
         $gateway->count                = 2;                //进程数量
         $gateway->lanIp                = '127.0.0.1';      //内网地址 集群设置register进程机器ip
         $gateway->startPort            = 2000;             //启动端口
-        $gateway->registerAddress      = '172.17.104.117:2346'; //注册地址
+        $gateway->registerAddress      = '172.17.0.14:2346'; //注册地址
         $gateway->pingInterval         = 30;               //心跳间隔时间
         $gateway->pingNotResponseLimit = 1;                //心跳发送方 0-server发送 1-client发送
         $gateway->pingData             = '';
