@@ -84,14 +84,15 @@ class GatewayWorkerServer extends Command
      */
     private function startGateway()
     {
-        $gateway                       = new Gateway("websocket://0.0.0.0:2345");
-        $gateway->name                 = 'gateway';        //进程名称
-        $gateway->count                = 2;                //进程数量
-        $gateway->lanIp                = '127.0.0.1';      //内网地址 集群设置register进程机器ip
-        $gateway->startPort            = 2000;             //启动端口
-        $gateway->registerAddress      = '172.17.0.14:2346'; //注册地址
-        $gateway->pingInterval         = 30;               //心跳间隔时间
-        $gateway->pingNotResponseLimit = 1;                //心跳发送方 0-server发送 1-client发送
+        $address                       = env("SOCKET_ADDRESS");
+        $gateway                       = new Gateway($address);
+        $gateway->name                 = 'gateway';                                     //进程名称
+        $gateway->count                = 2;                                             //进程数量
+        $gateway->lanIp                = '127.0.0.1';                                   //内网地址 集群设置register进程机器ip
+        $gateway->startPort            = 2000;                                          //启动端口
+        $gateway->registerAddress      = '172.17.0.14:2346';                            //注册地址
+        $gateway->pingInterval         = env("PING_INTERVAL");                          //心跳间隔时间
+        $gateway->pingNotResponseLimit = env("PING_NOT_RESPONSE_LIMIT");                //心跳发送方 0-server发送 1-client发送
         $gateway->pingData             = '';
     }
 

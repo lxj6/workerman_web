@@ -72,7 +72,7 @@ class Handler extends ExceptionHandler
         }
 
         if (env('app.debug') == false) {
-            return response()->error(500, $exception->getMessage());
+            return response()->error(500, $exception->getMessage().$exception->getLine().$exception->getFile());
         }
 
         return parent::render($request, $exception);

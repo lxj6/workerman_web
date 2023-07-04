@@ -40,6 +40,10 @@ Route::middleware(['api-token-auth'])->group(function () {
         Route::post('applyList','FirendsController@applyList');
     });
 
+    Route::prefix('im')->group(function () {
+        Route::post('send','ImController@send');
+    });
+
     Route::prefix('public')->group(function () {
         Route::post('uploadImg','PublicController@uploadImg');
     });

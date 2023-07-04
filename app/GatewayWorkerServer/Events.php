@@ -15,10 +15,13 @@ class Events
     public static function onConnect($client_id)
     {
         $res = [
-            'type'      => 'init',
-            'client_id' => $client_id,
+            'type'    => 'init',
+            'body' => [
+                'client_id'     => $client_id,
+                'ping_type'     => env('PING_NOT_RESPONSE_LIMIT'), // 心跳发送方 0-server发送 1-client发送
+                'ping_interval' => env('PING_INTERVAL'), // 心跳发送间隔
+            ],
         ];
-        //var_dump($res);
         Gateway::sendToClient($client_id, json_encode($res));
     }
 
@@ -30,27 +33,19 @@ class Events
     public static function onMessage($client_id, $data)
     {
         $message_data = json_decode($data);
-        if (!$message_data) {
-            return;
-        }
+        if (!$message_data) return ;
+        $body = $message_data->body;
 
         // 根据类型执行不同的业务
         switch ($message_data->type) {
             case 'init' :
+                Gateway::bindUid($client_id,$body->user_id);
+                self::send($client_id);
                 break;
-            case 'ping' :
-                return;
-            case 'login' :
-                return;
-            case 'say' :
-                    $resData = [
-                        'type' => 'say',
-                        'time' => time(),
-                        'client_id' => $client_id,
-                        'name' => $message_data->name,
-                        'contentText' => $message_data->contentText,
-                    ];
-                    Gateway::sendToAll(json_encode($resData));
+            case 'message' :
+                    //Gateway::sendToAll(json_encode($resData));
+                break;
+            case 'group' :
                 break;
             default :
                 break;
@@ -59,8 +54,20 @@ class Events
 
     public static function onClose($client_id)
     {
-        echo "onClose\r\n";
+        echo "onClose:" . $client_id . "\r\n";
     }
 
+
+    public static function send($client_id, $msg = 'success')
+    {
+        $data = [
+            'type' => 'handleStatus',
+            'body' => [
+                'msg' => $msg,
+            ]
+        ];
+
+        Gateway::sendToClient($client_id,json_encode($data));
+    }
 
 }
