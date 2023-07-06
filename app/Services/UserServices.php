@@ -25,6 +25,8 @@ class UserServices extends BaseServers
         }
 
         Auth::login($user);
+
+        return $user;
     }
 
 

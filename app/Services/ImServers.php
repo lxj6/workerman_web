@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class ImServers extends BaseServers
 {
+    public function queryMsg($input)
+    {
+        $user = Auth::user();
+
+        return UserChatMessage::with(['user_id','to_id'])->where('chat_id',$input['chat_id'])->whereRaw("(user_id = {$user->id} or to_id = {$user->id})")->get()->toArray();
+    }
+
+
     public function send($input)
     {
         $user = Auth::user();
@@ -34,7 +42,7 @@ class ImServers extends BaseServers
                     DB::table('user_chat')->where('id',$chat_id)->update(['user_id' => $input['to_id'], 'to_id' => $user->id, 'msg_type' => $input['msg_type'], 'last_msg' => $input['content'], 'updated_at' => $time]);
                 }
 
-                UserChatMessage::createMessage($chat_id, $input['to_id'], $user->id, $input['content'], $input['msg_type'], 0);
+                UserChatMessage::createMessage($chat_id, $user->id, $input['to_id'], $input['content'], $input['msg_type'], 0);
 
                 break;
             case 'group' :

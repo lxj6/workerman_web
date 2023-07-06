@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class ImController extends Controller
 {
+    public function queryMsg(Request $request)
+    {
+        $request->validate([
+            'chat_id' => 'required|bail|integer',
+        ]);
+
+        $data = ImServers::getServices()->queryMsg($request->post());
+
+        return response()->array($data);
+    }
+
     public function send(Request $request)
     {
         $request->validate([
@@ -15,6 +26,7 @@ class ImController extends Controller
            'type'     => 'required|bail|string',
            'msg_type' => 'required|bail|integer',
         ]);
+
         ImServers::getServices()->send($request->post());
 
         return response()->success();

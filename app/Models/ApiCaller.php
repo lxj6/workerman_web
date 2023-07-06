@@ -10,7 +10,7 @@ abstract class ApiCaller extends DBModel implements AuthenticatableContract
 {
     use Authenticatable;
 
-    const Api_Exp_Minutes = 60;
+    const Api_Exp_Minutes = 60 * 24;
     const Api_Caller_Type = 'default';
 
     public function getCallerType()

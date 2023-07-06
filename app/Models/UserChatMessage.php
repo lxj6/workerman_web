@@ -21,4 +21,15 @@ class UserChatMessage extends DBModel
         self::create($create);
     }
 
+
+    public function user_id()
+    {
+        return $this->hasOne('App\Models\User','id','user_id');
+    }
+
+    public function to_id()
+    {
+        return $this->hasOne('App\Models\User','id','to_id');
+    }
+
 }

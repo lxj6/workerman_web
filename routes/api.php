@@ -41,6 +41,7 @@ Route::middleware(['api-token-auth'])->group(function () {
     });
 
     Route::prefix('im')->group(function () {
+        Route::post('queryMsg','ImController@queryMsg');
         Route::post('send','ImController@send');
     });
 

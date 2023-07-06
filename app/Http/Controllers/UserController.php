@@ -28,9 +28,9 @@ class UserController extends Controller
     {
         $request->validate(self::Check_Rule);
 
-        UserServices::getServices()->login($request->post());
+        $user = UserServices::getServices()->login($request->post());
 
-        return response()->success();
+        return response()->array($user);
     }
 
     public function info()
