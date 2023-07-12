@@ -12,7 +12,7 @@ class DBModel extends Model
     protected $dateFormat = 'U';
     protected $primaryKey = 'id';
 
-
+    protected $dates = [];
 
     public static function saveItemById(int $id, array $array)
     {
@@ -27,6 +27,13 @@ class DBModel extends Model
         $info->save();
     }
 
-
+    /**
+     * 从数据库获取的为获取时间戳格式
+     *
+     * @return string
+     */
+    public function getDateFormat() {
+        return 'U';
+    }
 
 }

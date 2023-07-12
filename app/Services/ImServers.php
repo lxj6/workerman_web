@@ -2,12 +2,21 @@
 
 namespace App\Services;
 
+use App\Models\UserChat;
 use App\Models\UserChatMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ImServers extends BaseServers
 {
+    public function queryChatList()
+    {
+        $user = Auth::user();
+
+        return UserChat::with(['user_id','to_id'])->whereRaw("user_id = {$user->id}")->get()->toArray();
+    }
+
+
     public function queryMsg($input)
     {
         $user = Auth::user();

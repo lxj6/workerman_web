@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ImController extends Controller
 {
+    public function queryChatList(Request $request)
+    {
+        $data = ImServers::getServices()->queryChatList($request->post());
+
+        return response()->array($data);
+    }
+
     public function queryMsg(Request $request)
     {
         $request->validate([
