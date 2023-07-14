@@ -47,7 +47,7 @@ Route::middleware(['api-token-auth'])->group(function () {
     });
 
     Route::prefix('public')->group(function () {
-        Route::post('uploadImg','PublicController@uploadImg');
+        Route::post('upload','PublicController@upload');
     });
 
 });

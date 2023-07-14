@@ -16,9 +16,13 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate(self::Check_Rule);
+        $request->validate([
+                               'user_name' => 'bail|alpha_num|required|max:26',
+                               'password'  => 'bail|required|max:16',
+                               'nick_name' => 'bail|required|max:20',
+                           ]);
 
-        User::create($request->user_name,$request->password);
+        User::create($request->user_name,$request->password,$request->nick_name,$request->autograph ?? '');
 
         return response()->success();
     }

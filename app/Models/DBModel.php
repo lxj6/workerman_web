@@ -32,8 +32,17 @@ class DBModel extends Model
      *
      * @return string
      */
-    public function getDateFormat() {
-        return 'U';
+    public function getCreatedAtAttribute($value) {
+        return strtotime($value);
+    }
+
+    /**
+     * 从数据库获取的为获取时间戳格式
+     *
+     * @return string
+     */
+    public function getUpdatedAtAttribute($value) {
+        return strtotime($value);
     }
 
 }
